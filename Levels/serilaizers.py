@@ -44,4 +44,3 @@ class LessonSerializer(serializers.ModelSerializer):
         
         
         
-        # hi

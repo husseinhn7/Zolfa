@@ -49,7 +49,9 @@ class SupervisorSerializer(serializers.ModelSerializer):
             'see_intake_level_statistics',
             'can_edit_users_data',
             'can_edit_exam_results',
-            'can_edit_exam'
+            'can_edit_exam',
+            'can_edit_subject',
+            'can_edit_level',
             
         ]
     def create(self, validated_data):
