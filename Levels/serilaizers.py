@@ -40,3 +40,8 @@ class LessonSerializer(serializers.ModelSerializer):
             'lesson_video',
             'subject',
         ]
+        
+        
+        
+        
+        # hi
