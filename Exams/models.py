@@ -6,29 +6,31 @@ from django.db import models
 
 
 class Exam(models.Model):
-    exam_creator  = models.ForeignKey("Users.User", on_delete=models.CASCADE)
-    start_date    = models.DateField( auto_now=False, auto_now_add=False)
-    end_date      = models.DateField( auto_now=False, auto_now_add=False)
-    exam_duration = models.IntegerField()
-    final         = models.BooleanField()
-    subject       = models.ForeignKey("Levels.Subject",  on_delete=models.CASCADE)
+    title         = models.TextField(null=True , default= None)
+    exam_creator  = models.ForeignKey("Users.User", on_delete=models.CASCADE ,null=True , default= None)
+    start_date    = models.DateField( auto_now=False, auto_now_add=False , default=None)
+    end_date      = models.DateField( auto_now=False, auto_now_add=False , default=None)
+    exam_duration = models.IntegerField(null=True , default= None)
+    final         = models.BooleanField(default=False , null=True )
+    subj          = models.ForeignKey("Levels.Subject",  on_delete=models.CASCADE ,null=True , default= None)
     comment       = models.TextField(null=True , default= None)
+    final_mark    = models.IntegerField(null=True , default= None)
     
     
 
 
 
 class Question(models.Model):
-    exam     = models.ForeignKey(Exam,  on_delete=models.CASCADE)
-    question = models.ForeignKey("app.Model",  on_delete=models.CASCADE)
-    mark     = models.IntegerField()
+    exam     = models.ForeignKey(Exam,  on_delete=models.CASCADE ,null=True , default= None)
+    question = models.TextField(null=True , default= None)
+    mark     = models.IntegerField(null=True , default= None)
 
 
 
 
 class Options(models.Model):
-    option   = models.TextField()
-    question = models.ForeignKey(Question,  on_delete=models.CASCADE)
+    option   = models.TextField(null=True , default= None)
+    question = models.ForeignKey(Question,  on_delete=models.CASCADE ,null=True , default= None)
     
     
     
@@ -36,14 +38,17 @@ class Options(models.Model):
     
     
 class Marks(models.Model):
-    student  = models.ForeignKey("Users.User",  on_delete=models.CASCADE)
-    exam     = models.ForeignKey(Exam, on_delete=models.CASCADE)
-    mark     = models.IntegerField()
+    student  = models.ForeignKey("Users.User",  on_delete=models.CASCADE ,null=True , default= None)
+    exam     = models.ForeignKey(Exam, on_delete=models.CASCADE ,null=True , default= None)
+    mark     = models.IntegerField(null=True , default= None)
     
     
     
 class Answers(models.Model):
-    pass
+    student  = models.ForeignKey("Users.User",  on_delete=models.CASCADE ,null=True , default= None)
+    exam     = models.ForeignKey(Exam,  on_delete=models.CASCADE ,null=True , default= None)
+    question = models.ForeignKey(Question,  on_delete=models.CASCADE ,null=True , default= None)
+    answer   = models.TextField(null=True , default= None)
 
 
 
