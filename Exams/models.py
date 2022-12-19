@@ -29,8 +29,10 @@ class Question(models.Model):
 
 
 class Options(models.Model):
-    option   = models.TextField(null=True , default= None)
-    question = models.ForeignKey(Question,  on_delete=models.CASCADE ,null=True , default= None)
+    option         = models.TextField(null=True , default= None)
+    question       = models.ForeignKey(Question,  on_delete=models.CASCADE ,null=True , default= None)
+    correct_option = models.BooleanField(null = True , default = False)
+    final_mark     = models.IntegerField(null = True , default = False)
     
     
     
@@ -45,8 +47,8 @@ class Marks(models.Model):
     
     
 class Answers(models.Model):
+    
     student  = models.ForeignKey("Users.User",  on_delete=models.CASCADE ,null=True , default= None)
-    exam     = models.ForeignKey(Exam,  on_delete=models.CASCADE ,null=True , default= None)
     question = models.ForeignKey(Question,  on_delete=models.CASCADE ,null=True , default= None)
     answer   = models.TextField(null=True , default= None)
 
