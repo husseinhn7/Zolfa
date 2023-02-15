@@ -77,8 +77,8 @@ class AnswerSerializer(serializers.ModelSerializer):
         Answer          = Answers(answer=validated_data['answer'])
         Answer.student  = self.context['request'].user
         Answer.question = Question.objects.get(question=validated_data['question'])
-        option = Options.objects.get(option=validated_data['answer'])
-        mark = Marks.objects.get(student = Answer.student , exam = validated_data['exam'] )
+        option          = Options.objects.get(option=validated_data['answer'])
+        mark            = Marks.objects.get(student = Answer.student , exam = validated_data['exam'] )
         if option.correct_option:
             mark.mark  = mark.final_mark + mark.mark 
             mark.save()

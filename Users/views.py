@@ -20,10 +20,15 @@ class StudentLogin(generics.CreateAPIView):
     
     
     def post(self, request):
-        username = request.POST.get('username')
-        password = request.POST.get('password')
+        username = request.data['username']
+        password = request.data['password']
         user=authenticate(request , username = username , password = password)
+        print(request)
+        print(username)
+        print(request.data)
+        print(password)
         if user!=None:
+            print(request)
             login(request,user)
             return Response({'msg':'user logged in successfully','user' : f"{user}"})
         return Response({'msg':'this user does not exists' ,'user' : f"{user}"})
@@ -36,7 +41,7 @@ class StudentLogout(APIView):
     def get(self, request):
         user = request.user
         logout(request)
-        return Response({'msg':'user logged out successfully', 'msg 2' : f'{user}' ,'user' : f"{request.user}"})
+        return Response({'msg':'user logged out successfully', 'msg 2' : f'{user}' ,'user' : f"{request.user}"} )
         
         
 
