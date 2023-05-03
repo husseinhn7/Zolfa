@@ -8,12 +8,12 @@ from django.db import models
 class Exam(models.Model):
     title         = models.TextField(null=True , default= None)
     exam_creator  = models.ForeignKey("Users.User", on_delete=models.CASCADE ,null=True , default= None)
-    start_date    = models.DateField( auto_now=False, auto_now_add=False , default=None)
-    end_date      = models.DateField( auto_now=False, auto_now_add=False , default=None)
+    start_date    = models.DateTimeField( auto_now=False, auto_now_add=False , default=None)
+    end_date      = models.DateTimeField( auto_now=False, auto_now_add=False , default=None)
     exam_duration = models.IntegerField(null=True , default= None)
     final         = models.BooleanField(default=False , null=True )
     subj          = models.ForeignKey("Levels.Subject",  on_delete=models.CASCADE ,null=True , default= None)
-    comment       = models.TextField(null=True , default= None)
+    comment       = models.TextField(null=True , default= None , blank = True)
     final_mark    = models.IntegerField(null=True , default= None)
     
     

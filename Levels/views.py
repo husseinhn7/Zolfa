@@ -45,7 +45,7 @@ class UpdateLevel(generics.RetrieveUpdateAPIView):
 class CreateSubject(generics.CreateAPIView):
     queryset           = Subject.objects.all()
     serializer_class   = SubjectSerializer
-    permission_classes = [CanEditSubject]
+    # permission_classes = [CanEditSubject]
     
     
 
@@ -70,7 +70,11 @@ class UpdateSubject(generics.RetrieveUpdateAPIView):
     
 
 
-
+class ListSubject(generics.ListAPIView):
+    queryset           = Subject.objects.all()
+    serializer_class   = SubjectSerializer
+    # permission_classes = [CanEditSubject]
+    
 
 
 
@@ -119,6 +123,7 @@ create_subject   = CreateSubject.as_view()
 update_subject   = UpdateSubject.as_view()
 delete_subject   = DeleteSubject.as_view()
 retrieve_subject = RetrieveSubject.as_view()
+list_subject     = ListSubject.as_view()
 
 
 

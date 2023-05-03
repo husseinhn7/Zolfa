@@ -6,6 +6,7 @@ from Levels.models import Subject
 
 class OptionSerializer(serializers.ModelSerializer):
     class Meta:
+        
         model  = Options
         fields = [
             'option',
@@ -13,6 +14,12 @@ class OptionSerializer(serializers.ModelSerializer):
             'correct_option',
             'final_mark'
         ]
+        
+        def create(self, validated_data):
+            option = Options(**validated_data)
+            option.question = Question.objects.filter( question = validated_data['question'] )
+            option.save()
+            return option 
     
 
 class QuestionSerializer(serializers.ModelSerializer):
@@ -25,6 +32,12 @@ class QuestionSerializer(serializers.ModelSerializer):
             'mark',
             # 'op',
         ]
+        
+        def create(self, validated_data):
+            question = Question(**validated_data)
+            question.exam = Exam.objects.filter( title = validated_data['exam'] )
+            question.save()
+            return question 
 
     
 
@@ -49,10 +62,10 @@ class ExamSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         exam              = Exam(**validated_data)
         subj              = Subject.objects.filter(subject_name=validated_data['subj']).first()
-        exam.exam_creator = self.context['request'].user
+        # exam.exam_creator = self.context['request'].user
         exam.subj         = subj
         exam.save()
-        # print(self.request)
+        
         return exam
     
     

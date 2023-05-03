@@ -22,4 +22,7 @@ urlpatterns = [
     path('levels/'     , include('Levels.urls')),
     path('statistics/' , include('Statistics.urls')),
     path('users/'      , include('Users.urls')),
+    
+    path('api/'      , include('api.urls')),
+
 ]
