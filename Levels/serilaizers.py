@@ -19,9 +19,11 @@ class LevelSerializer(serializers.ModelSerializer):
         
 
 class SubjectSerializer(serializers.ModelSerializer):
+    pk = serializers.PrimaryKeyRelatedField(read_only=True)
     class Meta:
         model  = Subject
         fields = [
+            'pk' ,
             'subject_name',
             'tutor_name',
             'subject_level',

@@ -24,30 +24,35 @@ class OptionSerializer(serializers.ModelSerializer):
 
 class QuestionSerializer(serializers.ModelSerializer):
     # op = OptionSerializer()
+    pk = serializers.PrimaryKeyRelatedField(read_only=True)
+
     class Meta:
         model  = Question
         fields = [
+            'pk' ,
             'exam',
             'question',
             'mark',
             # 'op',
         ]
         
-        def create(self, validated_data):
-            question = Question(**validated_data)
-            question.exam = Exam.objects.filter( title = validated_data['exam'] )
-            question.save()
-            return question 
+        # def create(self, validated_data):
+        #     question = Question(**validated_data)
+        #     question.exam = Exam.objects.filter( title = validated_data['exam'] )
+        #     question.save()
+        #     return question 
 
     
 
 
 class ExamSerializer(serializers.ModelSerializer):
     # qus = QuestionSerializer()
+    pk = serializers.PrimaryKeyRelatedField(read_only=True)
     class Meta:
         model  = Exam
         fields = [
             # 'qus',
+            'pk',
             'title',
             'start_date',
             'end_date',
@@ -60,10 +65,11 @@ class ExamSerializer(serializers.ModelSerializer):
         
         
     def create(self, validated_data):
+        print(validated_data)
         exam              = Exam(**validated_data)
-        subj              = Subject.objects.filter(subject_name=validated_data['subj']).first()
+        # subj              = Subject.objects.filter(subject_name=validated_data['subj']).first()
         # exam.exam_creator = self.context['request'].user
-        exam.subj         = subj
+        # exam.subj         = subj
         exam.save()
         
         return exam
