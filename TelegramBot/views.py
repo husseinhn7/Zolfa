@@ -2,7 +2,6 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .d2 import  send
-from telegram._bot import Bot
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 import telebot

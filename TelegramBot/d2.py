@@ -12,8 +12,8 @@ def d(message):
 def send(m):   
     bot.send_message(1494250709 , m)
  
-
-class TelegramBot(TeleBot):
+  
+class TelegramBot(TeleBot):   
     def __init__(self ):
         super().__init__()
     @staticmethod
