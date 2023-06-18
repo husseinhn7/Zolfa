@@ -33,15 +33,50 @@ class CreateOption(generics.CreateAPIView):
 
 
 
-class StartExam(generics.CreateAPIView):
+class StartExam(generics.RetrieveAPIView):
     queryset         = Marks.objects.all()
     serializer_class =  MarkSerializer
+    
+    
+    def get(self, request, *args, **kwargs):
+        exam_id = self.kwargs.get('exam')
+        student_id = self.kwargs.get('student') 
+        query = Marks.objects.filter(exam = exam_id , student = student_id)
+        if query.exists() :
+            mark = MarkSerializer(query.first()).data
+            return Response(mark)
+        else :
+            data = {'exam' : exam_id , 'student' : student_id , 'mark' : 0}
+            serializer = MarkSerializer(data=data)
+            serializer.is_valid(raise_exception=True)
+            mark = serializer.save()
+        return Response({ 'status' : True , **data , 'id' : mark.pk })
+        
+        
+        
+        
+    
+    
+    
 
 
 
 class Answer(generics.CreateAPIView):
     queryset         = Answers.objects.all()
     serializer_class = AnswerSerializer
+    
+    def create(self, request, *args, **kwargs):
+        serializer = AnswerSerializer(data = request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        optionPk = request.data['answer']
+        option = Options.objects.get(pk=optionPk )
+        markPk = self.kwargs.get('markPk')
+        if option.correct_option:
+            mark = Marks.objects.get(pk = markPk)
+            mark.mark  = mark.mark + 10
+            mark.save()
+        return Response(serializer.data , status=201 )
     
     
     
@@ -82,6 +117,23 @@ class RetrieveOptions(generics.ListAPIView):
         query       = Options.objects.filter(question=question_id)
         return query
 
+
+
+class RetrieveMark(generics.RetrieveAPIView):
+    queryset         = Marks.objects.all()
+    serializer_class =  MarkSerializer
+    
+    def get(self, request, *args, **kwargs):
+        examPk = self.kwargs.get('pk')
+        studentPk =  self.kwargs.get('pm')
+        query = Marks.objects.filter(exam = examPk , student = studentPk)
+        if query.exists() :
+            mark = MarkSerializer(query.first()).data
+            return Response(mark)
+        return Response({ 'status' : True})
+
+
+
 create_exam     = CreateExam.as_view()
 create_question = CreateQuestion.as_view()
 create_option   = CreateOption.as_view()
@@ -93,3 +145,4 @@ retrieve_option   = RetrieveOptions.as_view()
 
 answer          = Answer.as_view()
 start_exam      = StartExam.as_view()
+retrieve_mark   = RetrieveMark.as_view()

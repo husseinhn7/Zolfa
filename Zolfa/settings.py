@@ -22,11 +22,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-)#jo@+px(l2i=9uwkw@teloj9f6$n=0wz)4l2d!53(gis5qa3n'
-
+TELEGRAM_BOT_TOKEN = '6202700443:AAFV2jcNIVDet6hC_v2fCx0N9MfrK_sfEpg'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.1.8']
+ALLOWED_HOSTS = ['192.168.1.6']
+
+
 
 
 # Application definition
@@ -56,7 +58,7 @@ AUTH_USER_MODEL = "Users.User"
 
 
 
-
+TELEGRAM_BOT_TOKEN = '6202700443:AAFV2jcNIVDet6hC_v2fCx0N9MfrK_sfEpg'
 
 
 MIDDLEWARE = [
@@ -200,4 +202,11 @@ SIMPLE_JWT = {
     "TOKEN_BLACKLIST_SERIALIZER": "rest_framework_simplejwt.serializers.TokenBlacklistSerializer",
     "SLIDING_TOKEN_OBTAIN_SERIALIZER": "rest_framework_simplejwt.serializers.TokenObtainSlidingSerializer",
     "SLIDING_TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSlidingSerializer",
+    
+    
+    #added settings 
+    
+    # "TOKEN_OBTAIN_SERIALIZER": "rest_framework_simplejwt.serializers.MyTokenObtainPairSerializer",
 }
+
+

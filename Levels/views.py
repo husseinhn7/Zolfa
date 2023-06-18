@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from Users.supervisor_permissions import CanEditSubject , CanEditLevel
 from rest_framework import generics 
 from .models import Level  , Subject , Lesson

@@ -1,14 +1,18 @@
 from rest_framework import serializers
 from .models import Exam , Question , Options , Answers , Marks 
-from Levels.models import Subject
+from Levels.models import Subject 
 
 
 
 class OptionSerializer(serializers.ModelSerializer):
+    pk = serializers.PrimaryKeyRelatedField(read_only=True)
+
     class Meta:
         
         model  = Options
+        
         fields = [
+            'pk',  
             'option',
             'question',
             'correct_option',
@@ -53,7 +57,8 @@ class ExamSerializer(serializers.ModelSerializer):
         fields = [
             # 'qus',
             'pk',
-            'title',
+            'exam_creator',
+            'title', 
             'start_date',
             'end_date',
             'exam_duration',
@@ -64,15 +69,7 @@ class ExamSerializer(serializers.ModelSerializer):
         ]
         
         
-    def create(self, validated_data):
-        print(validated_data)
-        exam              = Exam(**validated_data)
-        # subj              = Subject.objects.filter(subject_name=validated_data['subj']).first()
-        # exam.exam_creator = self.context['request'].user
-        # exam.subj         = subj
-        exam.save()
-        
-        return exam
+    
     
     
     
@@ -83,39 +80,30 @@ class ExamSerializer(serializers.ModelSerializer):
     
     
 class AnswerSerializer(serializers.ModelSerializer):
-    exam = serializers.CharField(max_length= 400)
+    
     class Meta:
         model  = Answers
         fields = [
+            'student' ,
             'answer' ,
             'question' ,
             'exam'
         ]
         
-    def create(self, validated_data):
-        Answer          = Answers(answer=validated_data['answer'])
-        Answer.student  = self.context['request'].user
-        Answer.question = Question.objects.get(question=validated_data['question'])
-        option          = Options.objects.get(option=validated_data['answer'])
-        mark            = Marks.objects.get(student = Answer.student , exam = validated_data['exam'] )
-        if option.correct_option:
-            mark.mark  = mark.final_mark + mark.mark 
-            mark.save()
-        
-        return mark
+    
     
     
     
 class MarkSerializer(serializers.ModelSerializer):
+    pk = serializers.PrimaryKeyRelatedField(read_only=True)
     class Meta:
         model  = Marks
         fields =[
+            'pk' ,  
+            'student',
             'exam',
+            'mark'
+            
         ]
         
-    def create(self, validated_data):
-        mark         = Marks(**validated_data)
-        mark.student = self.context['request'].user
-        mark.mark    = 0
-        mark.save()
-        return mark
+  

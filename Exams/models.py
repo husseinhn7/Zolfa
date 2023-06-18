@@ -17,6 +17,12 @@ class Exam(models.Model):
     final_mark    = models.IntegerField(null=True , default= None)
     
     
+    def get_questions(self):
+        pass
+    
+    def __str__(self) :
+        return self.title
+    
 
 
 
@@ -42,7 +48,7 @@ class Options(models.Model):
 class Marks(models.Model):
     student  = models.ForeignKey("Users.User",  on_delete=models.CASCADE ,null=True , default= None)
     exam     = models.ForeignKey(Exam, on_delete=models.CASCADE ,null=True , default= None)
-    mark     = models.IntegerField(null=True , default= None)
+    mark     = models.IntegerField( default = 0)
     
     
     
@@ -50,7 +56,8 @@ class Answers(models.Model):
     
     student  = models.ForeignKey("Users.User",  on_delete=models.CASCADE ,null=True , default= None)
     question = models.ForeignKey(Question,  on_delete=models.CASCADE ,null=True , default= None)
-    answer   = models.TextField(null=True , default= None)
+    exam     = models.ForeignKey(Exam ,  on_delete=models.CASCADE ,null=True , default= None)
+    answer   = models.ForeignKey(Options , on_delete=models.CASCADE  ,null=True , default= None)
 
 
 
