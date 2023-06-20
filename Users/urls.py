@@ -6,7 +6,6 @@ from .views import (
                     t ,
                     create_supervisor_view ,
  )
-from .intake_views import update_intake , create_intake , delete_intake , retrieve_intake
 from .student_views import update_Student , delete_Student , retrieve_Student
 
 urlpatterns = [
@@ -15,11 +14,7 @@ urlpatterns = [
     path( 'logout/' , Student_logout_view  ) ,
     path( 'create/' , create_supervisor_view ) ,
     path( 't/' , t ) ,
-    # intake urls
-    path( 'update-intake/<str:name>/'   , update_intake ) ,
-    path( 'create-intake/<str:name>/'   , create_intake ) ,
-    path( 'delete-intake/<str:name>/'   , delete_intake ) ,
-    path( 'retrieve-intake/<str:name>/' , retrieve_intake ) ,
+    
     # students urls 
     path( 'update-student/<str:name>/' , update_Student ) ,
     path( 'delete-student/<str:name>/' , delete_Student ) ,

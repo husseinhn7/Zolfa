@@ -4,8 +4,8 @@ from rest_framework.response import Response
 from .supervisor_permissions import CanEditIntakeData , CanEditExam
 from rest_framework.views import APIView
 from django.contrib.auth import login , logout , authenticate
-from .models import User , Intake
-from .serializers import StudentSerializer , SupervisorSerializer , IntakeSerializer
+from .models import User 
+from .serializers import StudentSerializer , SupervisorSerializer 
 # Create your views here.
 
 

@@ -1,5 +1,5 @@
 from rest_framework import serializers              
-from .models import User  ,  Permissions , Intake 
+from .models import User  ,  Permissions  
 from Levels.models import Level
 
 class StudentSerializer(serializers.ModelSerializer):
@@ -17,15 +17,7 @@ class StudentSerializer(serializers.ModelSerializer):
             'level',
             'intake',
         ]
-    def create(self, validated_data):
-        user = User(**validated_data)
-        user.set_password(validated_data['password'])
-        level = Level.objects.filter(level_name = validated_data['level']).first()
-        user.level = level
-        intake = Intake.objects.filter(name = validated_data['intake']).first()
-        user.intake = intake
-        user.save()
-        return user
+    
     
     
     
@@ -90,21 +82,6 @@ class SupervisorSerializer(serializers.ModelSerializer):
     
     
     
-    
-class IntakeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model  = Intake
-        fields = [ 
-                  'name' ,
-                  'level',
-                  'intake_description',
-                  'start_date',
-                  'register_date',
-                  'expire_date',
-                  'telegram_link_men',
-                  'telegram_link_women',
-                ]
-        
-        
+   
         
         

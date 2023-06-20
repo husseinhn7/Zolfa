@@ -1,6 +1,5 @@
 from rest_framework import serializers
 from .models import Exam , Question , Options , Answers , Marks 
-from Levels.models import Subject 
 
 
 

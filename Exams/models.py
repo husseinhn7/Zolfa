@@ -12,7 +12,7 @@ class Exam(models.Model):
     end_date      = models.DateTimeField( auto_now=False, auto_now_add=False , default=None)
     exam_duration = models.IntegerField(null=True , default= None)
     final         = models.BooleanField(default=False , null=True )
-    subj          = models.ForeignKey("Levels.Subject",  on_delete=models.CASCADE ,null=True , default= None)
+    subj          = models.ForeignKey("Subjects.Subject",  on_delete=models.CASCADE ,null=True , default= None)
     comment       = models.TextField(null=True , default= None , blank = True)
     final_mark    = models.IntegerField(null=True , default= None)
     
@@ -23,8 +23,6 @@ class Exam(models.Model):
     def __str__(self) :
         return self.title
     
-
-
 
 class Question(models.Model):
     exam     = models.ForeignKey(Exam,  on_delete=models.CASCADE ,null=True , default= None)
