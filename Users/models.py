@@ -16,7 +16,7 @@ class Intake(models.Model):
     telegram_link_women  = models.URLField( max_length=200)
     
     
-
+    
 class User(AbstractUser):
     name                 = models.CharField( max_length=50)
     age                  = models.IntegerField( null= True)

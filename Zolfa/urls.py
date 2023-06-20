@@ -23,7 +23,9 @@ urlpatterns = [
     path('levels/'     , include('Levels.urls')),
     path('statistics/' , include('Statistics.urls')),
     path('users/'      , include('Users.urls')),
-    path('api/'      , include('api.urls')),
-    path('bot/', include('TelegramBot.urls')),
+    path('api/'        , include('api.urls')),
+    path('subjects/'   , include('Subjects.urls')),
+    path('intakes/'    , include('Intakes.urls')),
+    path('bot/'        , include('TelegramBot.urls')),
 
 ]

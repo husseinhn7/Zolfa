@@ -5,9 +5,11 @@ from .models import Level , Lesson , Subject
 
 
 class LevelSerializer(serializers.ModelSerializer):
+    pk = serializers.PrimaryKeyRelatedField(read_only=True)
     class Meta:
         model  = Level
         fields = [
+            'pk', 
             'level_name',
             'number_of_students',
             'start_date',

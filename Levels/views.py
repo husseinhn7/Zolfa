@@ -31,6 +31,15 @@ class UpdateLevel(generics.RetrieveUpdateAPIView):
     serializer_class   = LevelSerializer
     permission_classes = [CanEditLevel]
     lookup_field       = 'level_name'
+    
+    
+
+class ListLevel(generics.ListAPIView):
+    queryset           = Level.objects.all()
+    serializer_class   = LevelSerializer
+    # permission_classes = [CanEditLevel]
+    
+
 
 
 
@@ -114,6 +123,7 @@ create_level   = CreateLevel.as_view()
 update_level   = UpdateLevel.as_view()
 delete_level   = DeleteLevel.as_view()
 retrieve_level = RetrieveLevel.as_view()
+list_levels    = ListLevel.as_view()
 
 
 

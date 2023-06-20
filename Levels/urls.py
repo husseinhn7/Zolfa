@@ -4,6 +4,7 @@ from .views import (
                     update_level ,
                     delete_level , 
                     retrieve_level , 
+                    list_levels ,
                     
                     create_lesson , 
                     update_lesson , 
@@ -24,6 +25,7 @@ urlpatterns = [
     path('update-level/<str:level_name>/' , update_level) , 
     path('delete-level/<str:level_name>/' , delete_level) , 
     path('retrieve-level/<str:level_name>/' , retrieve_level) , 
+    path('list-levels/' , list_levels) , 
     # 
     path('create-subject/' , create_subject) , 
     path('update-subject/<str:subject_name>/' , update_subject) , 

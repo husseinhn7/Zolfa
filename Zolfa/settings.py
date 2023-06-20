@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'Exams',
     'Users',
     'Levels',
+    'Intakes',
+    'Subjects',
     'rest_framework',
     'corsheaders',
     'rest_framework.authtoken',
