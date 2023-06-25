@@ -18,7 +18,7 @@ urlpatterns = [
     path('update-subject/<str:subject_name>/' , update_subject) , 
     path('delete-subject/<str:subject_name>/' , delete_subject) , 
     path('retrieve-subject/<str:subject_name>/' , retrieve_subject) , 
-    path('list-subjects' , list_subject) , 
+    path('list-subjects/' , list_subject) , 
     # 
     path('create-lesson/' , create_lesson) , 
     path('update-lesson/<str:lesson_name>/' , update_lesson) , 

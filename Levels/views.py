@@ -9,8 +9,7 @@ from .serializers import LevelSerializer
 class CreateLevel(generics.CreateAPIView):
     queryset           = Level.objects.all()
     serializer_class   = LevelSerializer
-    permission_classes = [CanEditLevel]
-
+    # permission_classes = [CanEditLevel]
 
 class RetrieveLevel(generics.RetrieveAPIView):
     queryset           = Level.objects.all()

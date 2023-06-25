@@ -26,7 +26,7 @@ TELEGRAM_BOT_TOKEN = '6202700443:AAFV2jcNIVDet6hC_v2fCx0N9MfrK_sfEpg'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.1.6']
+ALLOWED_HOSTS = ['192.168.1.7']
 
 
 

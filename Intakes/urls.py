@@ -5,9 +5,8 @@ from .views import update_intake , create_intake , delete_intake , retrieve_inta
 
 urlpatterns = [
     # intake urls
-    path( 'update-intake/<str:name>/'   , update_intake ) ,
-    path( 'create-intake/<str:name>/'   , create_intake ) ,
-    path( 'delete-intake/<str:name>/'   , delete_intake ) ,
+    path( 'update-intake/<int:pk>/'     , update_intake ) ,
+    path( 'create-intake/'              , create_intake ) ,
+    path( 'delete-intake/<int:pk>/'     , delete_intake ) ,
     path( 'retrieve-intake/<str:name>/' , retrieve_intake ) ,
-    
 ]
