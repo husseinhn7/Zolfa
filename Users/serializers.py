@@ -2,7 +2,53 @@ from rest_framework import serializers
 from .models import User  ,  Permissions  
 from Levels.models import Level
 
+
+    
+ 
+    
+class PermissionsSerializer(serializers.ModelSerializer):
+    class Meta :
+        model  = Permissions
+        fields = [
+            'supervisor',
+            'can_edit_levels',
+            'see_intake_level_statistics',
+            'can_edit_users_data',
+            'can_edit_exam_results',
+            'can_edit_exam',
+            'can_edit_subject',
+            'can_edit_intakes',      
+        ]
+    
+    
+    
+
+class SupervisorSerializer(serializers.ModelSerializer):
+    permissions_set = PermissionsSerializer(many=True, read_only=True)
+    # permissions_related_field = serializers.BooleanField(source='permissions.can_edit_exam')
+
+    class Meta:
+        model  = User
+        fields = [
+            # supervisor fields 
+            'name',
+            'age',
+            'username',
+            'gender',
+            'is_staff',
+            'permissions_set' 
+        ]
+    def get_fields(self):
+        
+        return super().get_fields()
+    
+    
+    
+   
+        
 class StudentSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True)
+
     class Meta:
         model  = User
         fields = [
@@ -17,71 +63,3 @@ class StudentSerializer(serializers.ModelSerializer):
             'level',
             'intake',
         ]
-    
-    
-    
-    
-    
-
-class SupervisorSerializer(serializers.ModelSerializer):
-    can_edit_levels             = serializers.BooleanField( default=False )
-    see_intake_level_statistics = serializers.BooleanField( default=False )
-    can_edit_users_data         = serializers.BooleanField( default=False )
-    can_edit_exam_results       = serializers.BooleanField( default=False )
-    can_edit_exam               = serializers.BooleanField( default=False )
-    can_edit_subject            = serializers.BooleanField( default=False )
-    can_edit_level              = serializers.BooleanField( default=False )
-    class Meta:
-        model  = User
-        fields = [
-            # supervisor fields 
-            'name',
-            'age',
-            'username',
-            'password',
-            'gender',
-            'is_staff',
-            # permission fields 
-            'can_edit_levels',
-            'see_intake_level_statistics',
-            'can_edit_users_data',
-            'can_edit_exam_results',
-            'can_edit_exam',
-            'can_edit_subject',
-            'can_edit_level',
-            
-        ]
-    def create(self, validated_data):
-        
-        user = User(
-            name     = validated_data['name'] ,
-            age      = validated_data['age'] ,
-            username = validated_data['username'] ,
-            gender   = validated_data['gender'] ,
-            is_staff = validated_data['is_staff'] ,
-            
-        )
-        user.set_password(validated_data['password'])
-        user.save()
-        if user.is_staff:
-            permissions = Permissions (
-                can_edit_levels             = validated_data['can_edit_levels'] ,
-                see_intake_level_statistics = validated_data['see_intake_level_statistics'] ,
-                can_edit_users_data         = validated_data['can_edit_users_data'], 
-                can_edit_exam_results       = validated_data['can_edit_exam_results'], 
-                can_edit_exam               = validated_data['can_edit_exam'], 
-                can_edit_subject            = validated_data['can_edit_subject'],
-                can_edit_level              = validated_data['can_edit_level'],
-            )  
-            permissions.supervisor = user 
-            permissions.save()
-            print(permissions)
-            print(permissions.supervisor)
-        return user
-    
-    
-    
-    
-   
-        
-        

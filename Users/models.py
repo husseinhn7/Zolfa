@@ -20,16 +20,19 @@ class User(AbstractUser):
     level                = models.ForeignKey('Levels.Level' ,default=None, on_delete=models.CASCADE , null= True)
     intake               = models.ForeignKey('Intakes.Intake',default=None, on_delete=models.CASCADE , null= True)
     is_staff             = models.BooleanField(default=False , null=True)
+    def __str__(self):
+        return f"permissions of {self.name}"
+
     
 class Permissions(models.Model):
     supervisor                  = models.ForeignKey("Users.User", null=True ,  on_delete=models.CASCADE)
-    can_edit_levels             = models.BooleanField(default=False , null=True)
-    see_intake_level_statistics = models.BooleanField(default=False , null=True)
-    can_edit_users_data         = models.BooleanField(default=False , null=True)
-    can_edit_exam_results       = models.BooleanField(default=False , null=True)
-    can_edit_exam               = models.BooleanField(default=False , null=True)
-    can_edit_subject            = models.BooleanField(default=False , null=True)
-    can_edit_level              = models.BooleanField(default=False , null=True)
+    can_edit_levels             = models.BooleanField(  null=True)
+    see_intake_level_statistics = models.BooleanField(  null=True)
+    can_edit_users_data         = models.BooleanField(  null=True)
+    can_edit_exam_results       = models.BooleanField(  null=True)
+    can_edit_exam               = models.BooleanField(  null=True)
+    can_edit_subject            = models.BooleanField(  null=True)
+    can_edit_intakes            = models.BooleanField(  null=True)
     
     def __str__(self):
         return f"permissions of {self.supervisor}"

@@ -12,6 +12,7 @@ can_edit_subject            = models.BooleanField(default=False , null=True)
 can_edit_level
 '''
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    permission_classes = ()
     @classmethod
     def get_token(cls, user : User):
         token = super().get_token(user)

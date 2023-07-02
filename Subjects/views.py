@@ -24,21 +24,21 @@ class CreateSubject(generics.CreateAPIView):
 class RetrieveSubject(generics.RetrieveAPIView):
     queryset           = Subject.objects.all()
     serializer_class   = SubjectSerializer
-    permission_classes = [CanEditSubject]
-    lookup_field       = 'subject_name'
+    # permission_classes = [CanEditSubject]
+    lookup_field       = 'name'
 
 
 class DeleteSubject(generics.DestroyAPIView):
     queryset           = Subject.objects.all()
     serializer_class   = SubjectSerializer
-    permission_classes = [CanEditSubject]
-    lookup_field       = 'subject_name'
+    # permission_classes = [CanEditSubject]
+    lookup_field       = 'name'
 
 class UpdateSubject(generics.RetrieveUpdateAPIView):
     queryset           = Subject.objects.all()
     serializer_class   = SubjectSerializer
-    permission_classes = [CanEditSubject]
-    lookup_field       = 'subject_name'
+    # permission_classes = [CanEditSubject]
+    lookup_field       = 'name'
     
 
 
@@ -55,28 +55,27 @@ class ListSubject(generics.ListAPIView):
 class CreateLesson(generics.CreateAPIView):
     queryset           = Lesson.objects.all()
     serializer_class   = LessonSerializer
-    permission_classes = [CanEditSubject]
-    lookup_field       = 'lesson_name'
+    # permission_classes = [CanEditSubject]
     
 
 class RetrieveLesson(generics.RetrieveAPIView):
     queryset           = Lesson.objects.all()
     serializer_class   = LessonSerializer
-    permission_classes = [CanEditSubject]
-    lookup_field       = 'lesson_name'
+    # permission_classes = [CanEditSubject]
+    lookup_field       = 'name'
 
 
 class DeleteLesson(generics.DestroyAPIView):
     queryset           = Lesson.objects.all()
     serializer_class   = LessonSerializer
-    permission_classes = [CanEditSubject]
-    lookup_field       = 'lesson_name'
+    # permission_classes = [CanEditSubject]
+    lookup_field       = 'name'
 
-class UpdateLesson(generics.RetrieveUpdateAPIView):
+class UpdateLesson(generics.UpdateAPIView ):
     queryset           = Lesson.objects.all()
     serializer_class   = LessonSerializer
-    permission_classes = [CanEditSubject]
-    lookup_field       = 'lesson_name'
+    # permission_classes = [CanEditSubject]
+    lookup_field       = 'name'
 
 
 

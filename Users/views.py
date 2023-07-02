@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from .supervisor_permissions import CanEditIntakeData , CanEditExam
 from rest_framework.views import APIView
 from django.contrib.auth import login , logout , authenticate
-from .models import User 
+from .models import User , Permissions
 from .serializers import StudentSerializer , SupervisorSerializer 
 # Create your views here.
 
@@ -55,6 +55,13 @@ class CreateSupervisor(generics.CreateAPIView):
 
 
 
+class ListSupervisor(generics.ListAPIView):
+    serializer_class = SupervisorSerializer
+    
+    def get_queryset(self):
+        permission = self.kwargs.get('per')
+        print(permission)
+        return User.objects.filter(**{f'permissions__{permission}' : True})
 
 
 
@@ -64,9 +71,7 @@ class CreateSupervisor(generics.CreateAPIView):
 
 
 
-
-
-
+list_supervisor = ListSupervisor.as_view()
 
 
 
@@ -94,6 +99,11 @@ class CreateSupervisor(generics.CreateAPIView):
 Student_Signup_view    = StudentSignup.as_view()
 Student_login_view     = StudentLogin.as_view()
 Student_logout_view    = StudentLogout.as_view()
+
+
+
+
+
 
 create_supervisor_view = CreateSupervisor.as_view()
 

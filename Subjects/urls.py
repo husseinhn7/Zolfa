@@ -15,14 +15,14 @@ from .views import (
 
 urlpatterns = [
     path('create-subject/' , create_subject) , 
-    path('update-subject/<str:subject_name>/' , update_subject) , 
-    path('delete-subject/<str:subject_name>/' , delete_subject) , 
-    path('retrieve-subject/<str:subject_name>/' , retrieve_subject) , 
+    path('update-subject/<str:name>/' , update_subject) , 
+    path('delete-subject/<str:name>/' , delete_subject) , 
+    path('retrieve-subject/<str:name>/' , retrieve_subject) , 
     path('list-subjects/' , list_subject) , 
     # 
     path('create-lesson/' , create_lesson) , 
-    path('update-lesson/<str:lesson_name>/' , update_lesson) , 
-    path('delete-lesson/<str:lesson_name>/' , delete_lesson) , 
-    path('retrieve-lesson/<str:lesson_name>/' , retrieve_lesson) , 
+    path('update-lesson/<str:name>/' , update_lesson) , 
+    path('delete-lesson/<str:name>/' , delete_lesson) , 
+    path('retrieve-lesson/<str:name>/' , retrieve_lesson) , 
     
 ]

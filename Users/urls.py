@@ -5,6 +5,7 @@ from .views import (
                     Student_logout_view , 
                     t ,
                     create_supervisor_view ,
+                    list_supervisor , 
  )
 from .student_views import update_Student , delete_Student , retrieve_Student
 
@@ -13,6 +14,8 @@ urlpatterns = [
     path( 'login/'  ,  Student_login_view ) ,
     path( 'logout/' , Student_logout_view  ) ,
     path( 'create/' , create_supervisor_view ) ,
+    path( 'list-supervisor/<str:per>/' , list_supervisor ) ,
+
     path( 't/' , t ) ,
     
     # students urls 

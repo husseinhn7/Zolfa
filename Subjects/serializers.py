@@ -6,10 +6,8 @@ class SubjectSerializer(serializers.ModelSerializer):
         model  = Subject
         fields = [
             'pk' ,
-            'subject_name',
-            'tutor_name',
-            'subject_level',
-            'exams',
+            'name',
+            'level',
         ]
         
         
@@ -18,7 +16,7 @@ class LessonSerializer(serializers.ModelSerializer):
     class Meta:
         model  = Lesson
         fields = [
-            'lesson_name',
+            'name',
             'lesson_description',
             'lesson_pdf',
             'lesson_video',

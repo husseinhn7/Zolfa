@@ -9,9 +9,8 @@ class LevelSerializer(serializers.ModelSerializer):
     class Meta:
         model  = Level
         fields = [
-            'pk', 
-            'level_name',
-            'number_of_students',
+            'pk',   
+            'name',
             'start_date',
             'end_date',
             'level_statues',
