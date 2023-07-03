@@ -13,9 +13,9 @@ from .views import (
 urlpatterns = [
     # 
     path('create-level/' , create_level) , 
-    path('update-level/<str:level_name>/' , update_level) , 
-    path('delete-level/<str:level_name>/' , delete_level) , 
-    path('retrieve-level/<str:level_name>/' , retrieve_level) , 
+    path('update-level/<str:name>/' , update_level) , 
+    path('delete-level/<str:name>/' , delete_level) , 
+    path('retrieve-level/<str:name>/' , retrieve_level) , 
     path('list-levels/' , list_levels) , 
     # 
    

@@ -5,7 +5,7 @@ from .supervisor_permissions import CanEditIntakeData , CanEditExam
 from rest_framework.views import APIView
 from django.contrib.auth import login , logout , authenticate
 from .models import User , Permissions
-from .serializers import StudentSerializer , SupervisorSerializer 
+from .serializers import StudentSerializer , SupervisorSerializer , StudentNameSerializer , PermissionsSerializer
 # Create your views here.
 
 
@@ -67,6 +67,56 @@ class ListSupervisor(generics.ListAPIView):
 
 
 
+
+class RetrieveStudentName(generics.RetrieveAPIView):
+    queryset         = User.objects.all()
+    serializer_class = StudentNameSerializer
+    lookup_field     = 'name'
+    
+    
+
+
+class AddSupervisor(generics.CreateAPIView):
+    queryset = Permissions.objects.all()
+    serializer_class = PermissionsSerializer
+    
+
+class UpdateSupervisor(generics.UpdateAPIView):
+    queryset = Permissions.objects.all()
+    serializer_class = PermissionsSerializer
+    lookup_field = 'name'
+class DeleteSupervisor(generics.DestroyAPIView):
+    queryset = Permissions.objects.all()
+    serializer_class = PermissionsSerializer
+    lookup_field = 'name'
+
+class RetrieveSupervisor(generics.RetrieveAPIView):
+    
+    def get(self, request, *args, **kwargs):
+        name = self.kwargs.get('name')
+        user = User.objects.filter(name = name).first()
+        if not user:
+            return Response({'m':'user do' } , status=404)
+        permissions = Permissions.objects.filter(supervisor = user).first()
+        if not permissions:
+            return Response({'m':'user do' } , status=404)
+        # print(permissions)
+        Json_permissions = PermissionsSerializer(permissions).data
+        return Response(Json_permissions)
+
+
+
+
+
+
+
+
+update_supervisor = UpdateSupervisor.as_view()
+delete_supervisor = DeleteSupervisor.as_view()
+get_supervisor_permissions = RetrieveSupervisor.as_view()
+
+add_supervisor = AddSupervisor.as_view()
+get_student = RetrieveStudentName.as_view()
 
 
 

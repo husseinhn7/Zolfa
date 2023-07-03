@@ -14,22 +14,22 @@ class CreateLevel(generics.CreateAPIView):
 class RetrieveLevel(generics.RetrieveAPIView):
     queryset           = Level.objects.all()
     serializer_class   = LevelSerializer
-    permission_classes = [CanEditLevel]
-    lookup_field       = 'level_name'
+    # permission_classes = [CanEditLevel]
+    lookup_field       = 'name'
 
 
 
 class DeleteLevel(generics.DestroyAPIView):
     queryset           = Level.objects.all()
     serializer_class   = LevelSerializer
-    permission_classes = [CanEditLevel]
-    lookup_field       = 'level_name'
+    # permission_classes = [CanEditLevel]
+    lookup_field       = 'name'
 
 class UpdateLevel(generics.RetrieveUpdateAPIView):
     queryset           = Level.objects.all()
     serializer_class   = LevelSerializer
-    permission_classes = [CanEditLevel]
-    lookup_field       = 'level_name'
+    # permission_classes = [CanEditLevel]
+    lookup_field       = 'name'
     
     
 

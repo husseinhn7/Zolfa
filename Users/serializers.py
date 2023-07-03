@@ -11,15 +11,25 @@ class PermissionsSerializer(serializers.ModelSerializer):
         model  = Permissions
         fields = [
             'supervisor',
+            'name',
             'can_edit_levels',
-            'see_intake_level_statistics',
+            'see_statistics',
             'can_edit_users_data',
             'can_edit_exam_results',
             'can_edit_exam',
             'can_edit_subject',
-            'can_edit_intakes',      
+            'can_edit_intakes',
+            'can_edit_landing_page'      
         ]
-    
+    def create(self, validated_data):
+        user = validated_data['supervisor'] 
+        
+        user.is_staff = True
+        user.save()
+        permission = Permissions(**validated_data)
+        permission.name = user.name
+        permission.save()
+        return permission
     
     
 
@@ -63,3 +73,13 @@ class StudentSerializer(serializers.ModelSerializer):
             'level',
             'intake',
         ]
+        
+        
+class StudentNameSerializer(serializers.ModelSerializer):
+    pk = serializers.PrimaryKeyRelatedField(read_only=True)
+    class Meta:
+        model = User
+        fields = [
+            'pk' , 
+            'name'
+            ]
