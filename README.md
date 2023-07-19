@@ -1,39 +1,64 @@
-users/signup/   
-users/login/    
-users/logout/
-users/create/   
+# Zolfa Online Learning Platform
+
+This is a Django and Django Rest Framework-based online learning platform that allows students to enroll in different intakes and levels, take exams, and learn from various subjects and lessons. The platform also includes a supervisor module, where supervisors are assigned specific permissions based on their roles.
 
 
-# intake urls
-users/update-intake/<str:name>/   update_intake 
-users/create-intake/<str:name>/   create_intake 
-users/delete-intake/<str:name>/   delete_intake 
-users/retrieve-intake/<str:name>/   retrieve_intake 
+# Features
 
+The online learning platform includes the following features:
 
-# students urls 
-users/update-student/<str:name>/     update_Student 
-users/delete-student/<str:name>/     delete_Student 
-users/retrieve-student/<int:pk>/     retrieve_Student 
+* __Intakes and Levels__ : Students are enrolled in different intakes and levels based on their academic progress. The platform allows administrators to create and manage intakes and levels.
+* __Subjects and Lessons__ : The platform offers various subjects and lessons for students to learn. Each subject includes multiple lessons, and students can track their progress.
+* __Exams__ : Each subject has its own exams that students can take to test their knowledge and skills. Students can view their exam results and receive feedback.
+* __Supervisors__ : The platform includes a supervisor module that allows supervisors to manage students, exams, and lessons. Supervisors are assigned specific permissions based on their roles.
 
 
 
 
+# Setup
+
+To set up the online learning platform, follow these steps:
+
+1.Clone the repository and navigate to the project directory:
+
+git clone https://github.com/husseinhn7/Zolfa.git
+cd Zolfa 
+
+2.Create a virtual environment and activate it: 
+
+python -m venv env
+source env/bin/activate
+
+3.Install the required packages: 
+
+pip install -r requirements.txt
+
+4.Create the database tables:
+
+python manage.py migrate
 
 
 
 
-levels/create-level/                                 create_level  
-levels/update-level/<str:level_name>/                update_level  
-levels/delete-level/<str:level_name>/                delete_level  
-levels/retrieve-level/<str:level_name>/              retrieve_level  
-# 
-levels/create-subject/                               create_subject  
-levels/update-subject/<str:subject_name>/            update_subject  
-levels/delete-subject/<str:subject_name>/            delete_subject  
-levels/retrieve-subject/<str:subject_name>/          retrieve_subject  
-# 
-levels/create-lesson/                                create_lesson  
-levels/update-lesson/<str:lesson_name>/              update_lesson  
-levels/delete-lesson/<str:lesson_name>/              delete_lesson  
-levels/retrieve-lesson/<str:lesson_name>/            retrieve_lesson  
+# Supervisor Permissions 
+
+The following permissions are available for supervisors:
+
+* __View Students__ : Supervisors can view students' profiles, including their intake, level, and exam results.
+
+* __Manage Students__: Supervisors can create, update, and delete students' profiles.
+
+* __Manage Exams__: Supervisors can create, update, and delete exams.
+
+* __Manage Lessons__: Supervisors can create, update, and delete lessons.
+
+
+
+
+
+
+
+
+
+
+
